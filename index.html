@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photo &amp; Music App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>📷 Photo &amp; Music App 🎵</h1>
+    <nav class="tabs" role="tablist">
+      <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="camera-section" id="tab-camera">
+        📷 Camera
+      </button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="music-section" id="tab-music">
+        🎵 Music
+      </button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== CAMERA SECTION ===== -->
+    <section id="camera-section" class="tab-panel" aria-labelledby="tab-camera">
+      <div class="camera-container">
+        <div class="video-wrapper">
+          <video id="video" autoplay playsinline muted aria-label="Camera preview"></video>
+          <canvas id="snapshot-canvas" hidden></canvas>
+        </div>
+
+        <div class="camera-controls">
+          <button id="start-camera-btn" class="btn btn-primary">
+            🎥 Start Camera
+          </button>
+          <button id="capture-btn" class="btn btn-capture" disabled>
+            📸 Capture Photo
+          </button>
+          <button id="stop-camera-btn" class="btn btn-secondary" disabled>
+            ⏹ Stop Camera
+          </button>
+        </div>
+
+        <p id="camera-status" class="status-msg" role="status" aria-live="polite"></p>
+      </div>
+
+      <section class="gallery" aria-label="Captured photos">
+        <h2>Photo Gallery <span id="photo-count" class="badge">0</span></h2>
+        <div id="gallery-grid" class="gallery-grid"></div>
+        <p id="gallery-empty" class="empty-msg">No photos yet. Start the camera and take a snap!</p>
+      </section>
+    </section>
+
+    <!-- ===== MUSIC SECTION ===== -->
+    <section id="music-section" class="tab-panel hidden" aria-labelledby="tab-music">
+
+      <div class="player-card" id="player-card">
+        <div class="now-playing-art" id="now-playing-art" aria-hidden="true">🎵</div>
+        <div class="now-playing-info">
+          <p class="track-title" id="track-title">No track selected</p>
+          <p class="track-artist" id="track-artist">—</p>
+        </div>
+
+        <div class="progress-container">
+          <span class="time" id="current-time">0:00</span>
+          <input
+            type="range"
+            id="seek-bar"
+            class="seek-bar"
+            min="0"
+            max="100"
+            value="0"
+            step="0.1"
+            aria-label="Seek"
+          />
+          <span class="time" id="duration">0:00</span>
+        </div>
+
+        <div class="player-controls">
+          <button id="prev-btn" class="ctrl-btn" aria-label="Previous track">⏮</button>
+          <button id="play-pause-btn" class="ctrl-btn play-btn" aria-label="Play" disabled>▶</button>
+          <button id="next-btn" class="ctrl-btn" aria-label="Next track">⏭</button>
+        </div>
+
+        <div class="volume-row">
+          <span aria-hidden="true">🔈</span>
+          <input
+            type="range"
+            id="volume-bar"
+            class="volume-bar"
+            min="0"
+            max="1"
+            step="0.02"
+            value="0.8"
+            aria-label="Volume"
+          />
+          <span aria-hidden="true">🔊</span>
+        </div>
+      </div>
+
+      <div class="playlist-area">
+        <div class="playlist-header">
+          <h2>Playlist <span id="track-count" class="badge">0</span></h2>
+          <label class="btn btn-primary upload-label" for="music-upload">
+            ➕ Add Music
+          </label>
+          <input
+            type="file"
+            id="music-upload"
+            accept="audio/*"
+            multiple
+            hidden
+            aria-label="Upload music files"
+          />
+        </div>
+        <ul id="playlist" class="playlist" role="listbox" aria-label="Playlist"></ul>
+        <p id="playlist-empty" class="empty-msg">No tracks yet. Click "Add Music" to upload audio files.</p>
+      </div>
+
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
